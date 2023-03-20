@@ -3,12 +3,44 @@
 
 <head>
     <title>PID Loop Simulator</title>
+    <meta charset="UTF-8">
+    <meta name="description" content="Simulate a PID (proportional, integral, differential) controller online.">
+    <meta name="author" content="Nicolas Ventura">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" type="text/css" href="css/style.css" />
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script type="module" src="js/app.js"></script>
 </head>
 
 <body>
-    <h1>PID Loop Simulator</h1>
+    <div id="cols">
+        <div>
+            <h1>PID Loop Simulator</h1>
+            <p><b>Instructions</b></p>
+        </div>
+        <form action="javascript:void(0);">
+            <div id="plant" title="Plant Parameters">
+                <input id="first" type="radio" name="order" /><label for="first">1st Order: dx = f(x)</label><br />
+                <input id="second" type="radio" name="order" /><label for="second">2nd Order: ddx = f(x,
+                    dx)</label><br />
+                <input id="third" type="radio" name="order" /><label for="third">3rd Order: d3x = f(x, dx,
+                    ddx)</label><br />
+                <input id="DE" type="text" placeholder="Plant Function" /><label for="DE">Plant Function</label>
+            </div>
+            <div id="pidctrl" title="Controller Parameters">
+                <input id="ref" type="text" placeholder="Control Setpoint" /><label for="ref">Setpoint: ref =
+                    f(t)</label><br />
+                <input id="Kp" type="number" placeholder="Kp" /><label for="dt">Proportional Gain</label><br />
+                <input id="Ki" type="number" placeholder="Ki" /><label for="dt">Integral Gain</label><br />
+                <input id="Kd" type="number" placeholder="Kd" /><label for="dt">Differential Gain</label>
+            </div>
+            <div id="sim" title="Simulation Parameters">
+                <input id="dt" type="number" placeholder="Timestep" /><label for="dt">Timestep</label><br />
+                <input id="tf" type="number" placeholder="Duration" /><label for="tf">Duration</label><br />
+                <input type="button" value="Simulate!" />
+            </div>
+        </form>
+    </div>
     <canvas id="chart"></canvas>
 </body>
 

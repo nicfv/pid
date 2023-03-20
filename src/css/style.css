@@ -1,0 +1,59 @@
+@import url('https://necolas.github.io/normalize.css/8.0.1/normalize.css');
+
+* {
+    outline: none;
+    box-sizing: border-box;
+    border-collapse: collapse;
+}
+
+html,
+body {
+    height: 100%;
+    background: white;
+    color: black;
+    font-family: sans-serif;
+}
+
+canvas {
+    background: white;
+    margin: 1em;
+}
+
+div#cols {
+    display: flex;
+    justify-content: space-around;
+}
+
+form {
+    max-width: max-content;
+    font-family: monospace;
+}
+
+form div {
+    padding: 0.5em;
+}
+
+form div input {
+    margin: 0.25em;
+}
+
+div#plant {
+    background: rgba(255, 0, 0, 0.25);
+}
+
+div#pidctrl {
+    background: rgba(255, 255, 0, 0.25);
+}
+
+div#sim {
+    background: rgba(0, 255, 0, 0.25);
+}
+
+@media (prefers-color-scheme: dark) {
+
+    html,
+    body {
+        background: black;
+        color: white;
+    }
+}
