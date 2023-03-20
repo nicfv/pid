@@ -1,8 +1,8 @@
 {
   "scripts": {
-    "setup": "rm -rf dist && cp -r src/ dist && rm -f dist/*.js dist/**/*.js",
-    "js:dev": "npx esbuild@latest src/js/app.js --bundle --watch --outfile=dist/js/app.js",
-    "js:build": "npx esbuild@latest src/js/app.js --bundle --minify --outfile=dist/js/app.js",
+    "setup": "rm -rf dist && cp -r src/ dist && rm -f dist/*.ts dist/**/*.ts",
+    "js:dev": "npx esbuild@latest src/js/app.ts --bundle --watch --outfile=dist/js/app.js",
+    "js:build": "npx esbuild@latest src/js/app.ts --bundle --minify --outfile=dist/js/app.js",
     "dev": "npm run setup && npm run js:dev",
     "build": "npm run setup && npm run js:build",
     "clean": "rm -rf dist node_modules package-lock.json"

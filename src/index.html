@@ -14,30 +14,75 @@
 
 <body>
     <div id="cols">
-        <div>
-            <h1>PID Loop Simulator</h1>
-            <p><b>Instructions</b></p>
+        <div id="info" class="closed" title="Click anywhere here to collapse/expand">
+            <h2>PID Loop Simulator</h2>
+            <h3>Instructions</h3>
+            <p><b class="red">Red</b> The red control panel defines the plant behavior. Select whether the plant
+                exhibits first, second, or third order behavior and input the governing differential equation in the
+                text box labeled "Plant Function." This should be a function of time and the lower order state
+                variables. Only input the mathematical expression. See an example below.</p>
+            <p><b class="ylw">Yellow</b> The yellow control panel is for defining the controller. Program a reference
+                signal using the textbox labeled "Setpoint." This should be a function of time. Additionally, use the
+                gain parameters to finely tune the controller.</p>
+            <p><b class="grn">Green</b> The green panel defines simulation parameters. Set the timestep and duration
+                here. After simulating, scroll down to view the resulting timeseries graph, which is responsive to mouse
+                clicks.</p>
+            <div id="hide">
+                <h3>Examples</h3>
+                <ol>
+                    <li>Select 1st order system and input the plant function: <code>1-x</code></li>
+                    <li>Enter <code>0</code> in all controller properties, including the setpoint</li>
+                    <li>Simulate for <code>10</code> seconds with timestep <code>0.01</code></li>
+                    <li>The system response should converge to <code>1</code></li>
+                </ol>
+                <ol>
+                    <li>Select 2nd order system and input the plant function: <code>dx+x+1</code></li>
+                    <li>Use the following step function as the controller setpoint: <code>(t>1)?1:0</code></li>
+                    <li>Set all controller tuning properties to <code>0</code></li>
+                    <li>Simulate for <code>10</code> seconds with timestep <code>0.01</code></li>
+                    <li>The system should exhibit an unstable response</li>
+                    <li>Set proportional gain to <code>100</code>, integral gain to <code>20</code>, and differential
+                        gain
+                        to <code>30</code></li>
+                    <li>The system should exhibit a much more stable response</li>
+                </ol>
+                <h3>Tips</h3>
+                <ul>
+                    <li>Only the text boxes for Plant Function and Control Setpoint accept a math expression</li>
+                    <li>Use the provided variables in your math expressions: <code>t, x, dx, ddx</code></li>
+                    <li>To make a piecewise function, use the <code>expr?true:false</code> operator, like
+                        <code>(t>1)?(t-1):0</code> which is a ramp function starting at <code>t=1</code>
+                    </li>
+                    <li>The JavaScript <a
+                            href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math"
+                            target="_blank"><code>Math</code></a> library can be used here for advanced functions, for
+                        example, trigonometric functions <code>Math.sin(t)</code></li>
+                    <li>Expressions are not whitespace sensitive</li>
+                    <li>Use <code>**</code> for an exponent (<code>a ** b == a ^ b</code>)</li>
+                </ul>
+            </div>
         </div>
         <form action="javascript:void(0);">
-            <div id="plant" title="Plant Parameters">
-                <input id="first" type="radio" name="order" /><label for="first">1st Order: dx = f(x)</label><br />
+            <div class="red" title="Plant Parameters">
+                <input id="first" type="radio" name="order" checked /><label for="first">1st Order: dx =
+                    f(x)</label><br />
                 <input id="second" type="radio" name="order" /><label for="second">2nd Order: ddx = f(x,
                     dx)</label><br />
                 <input id="third" type="radio" name="order" /><label for="third">3rd Order: d3x = f(x, dx,
                     ddx)</label><br />
                 <input id="DE" type="text" placeholder="Plant Function" /><label for="DE">Plant Function</label>
             </div>
-            <div id="pidctrl" title="Controller Parameters">
+            <div class="ylw" title="Controller Parameters">
                 <input id="ref" type="text" placeholder="Control Setpoint" /><label for="ref">Setpoint: ref =
                     f(t)</label><br />
                 <input id="Kp" type="number" placeholder="Kp" /><label for="dt">Proportional Gain</label><br />
                 <input id="Ki" type="number" placeholder="Ki" /><label for="dt">Integral Gain</label><br />
                 <input id="Kd" type="number" placeholder="Kd" /><label for="dt">Differential Gain</label>
             </div>
-            <div id="sim" title="Simulation Parameters">
+            <div class="grn" title="Simulation Parameters">
                 <input id="dt" type="number" placeholder="Timestep" /><label for="dt">Timestep</label><br />
                 <input id="tf" type="number" placeholder="Duration" /><label for="tf">Duration</label><br />
-                <input type="button" value="Simulate!" />
+                <input id="go" type="button" value="Simulate!" />
             </div>
         </form>
     </div>
