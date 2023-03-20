@@ -37,13 +37,16 @@ jobs:
           node-version: 16
       - name: Install Dependencies
         run: npm i
+      - name: Build Project
+        run: npm run build
+      - name: Move Dependencies
+        run: mv node_modules dist/
       - name: Setup Pages
         uses: actions/configure-pages@v3
       - name: Upload artifact
         uses: actions/upload-pages-artifact@v1
         with:
-          # Upload entire repository
-          path: '.'
+          path: 'dist'
       - name: Deploy to GitHub Pages
         id: deployment
         uses: actions/deploy-pages@v1
